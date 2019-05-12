@@ -58,9 +58,13 @@ public class UnionFind {
         }
         int vertex1 = find(v1);
         int vertex2 = find(v2);
-        root[vertex2] = root[vertex1] + root[vertex2];
-        root[vertex1] = vertex2;
-
+        if (sizeOf(vertex1) > sizeOf(vertex2)) {
+            root[vertex1] = root[vertex2] + root[vertex1];
+            root[vertex2] = vertex1;
+        } else {
+            root[vertex2] = root[vertex1] + root[vertex2];
+            root[vertex1] = vertex2;
+        }
     }
 
     /* Returns the root of the set V belongs to. Path-compression is employed

@@ -21,6 +21,12 @@ public class TestUnionFind {
         lst.union(2, 0);
         assertEquals(lst.sizeOf(4), 5);
         assertTrue(lst.connected(4, 1));
+        try {
+            lst.union(6, 8);
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println("Invalid input!");
+        }
     }
 
 }
