@@ -1,5 +1,5 @@
 public class UnionFind {
-
+    /******* Version of Path Compression *********/
     // TODO - Add instance variables?
     int[] root;
     /* Creates a UnionFind data structure holding n vertices. Initially, all
@@ -41,7 +41,11 @@ public class UnionFind {
         // TODO
         validate(v1);
         validate(v2);
-        return find(v1) == find(v2);
+        if (find(v1) == find(v2)) {
+
+            return true;
+        }
+        return false;
     }
 
     /* Connects two elements v1 and v2 together. v1 and v2 can be any valid 
@@ -75,7 +79,8 @@ public class UnionFind {
         if (parent(vertex) < 0) {
             return vertex;
         }
-        return find(parent(vertex));
+        root[vertex] = find(parent(vertex));
+        return root[vertex];
     }
 
 }
