@@ -33,7 +33,7 @@ public class Percolation {
     }
 
     public void open(int row, int col) {
-        if(!boundValidate(row, col)) {
+        if (!boundValidate(row, col)) {
             throw new IndexOutOfBoundsException();
         } else if (isCellOpen[row][col]) {
             return;
@@ -41,15 +41,17 @@ public class Percolation {
         isCellOpen[row][col] = true;
         openNumber += 1;
         int num = xyTo1D(row, col);
-        connect(num, row-1, col);
-        connect(num, row+1, col);
-        connect(num, row, col-1);
-        connect(num, row, col+1);
+        connect(num, row - 1, col);
+        connect(num, row + 1, col);
+        connect(num, row, col - 1);
+        connect(num, row, col + 1);
         checkTopBottom(num);
     }
 
     public boolean isOpen(int row, int col) {
-        boundValidate(row, col);
+        if (!boundValidate(row, col)) {
+            throw new IndexOutOfBoundsException();
+        }
         return isCellOpen[row][col];
     }
 
@@ -76,7 +78,7 @@ public class Percolation {
 
     private void lenValidate(int N) {
         if (N <= 0) {
-            throw new IndexOutOfBoundsException("N must be larger than 0.");
+            throw new IllegalArgumentException("N must be larger than 0.");
         }
     }
 
@@ -96,11 +98,10 @@ public class Percolation {
     }
 
     private void checkTopBottom(int num) {
-        if (0 <= num && num < len - 1) {
+        if (0 <= num && num < len) {
             lstFormal.union(num, top);
             lstHelper.union(num, top);
-        }
-        else if (num < len * len && num >= len * len - len) {
+        } else if (num < len * len && num >= len * len - len) {
             lstFormal.union(num, bottom);
         }
     }

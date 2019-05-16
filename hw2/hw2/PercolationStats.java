@@ -49,7 +49,7 @@ public class PercolationStats {
 
     private double experiment(PercolationFactory pf) {
         Percolation per = pf.make(length);
-        while(!per.percolates()) {
+        while (!per.percolates()) {
             randomOpen(per);
         }
         return (double) per.numberOfOpenSites() / (double) (length * length);
